@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/numirias/python-isjosh18.svg?branch=master)](https://travis-ci.org/numirias/python-isjosh18)
 [![codecov](https://codecov.io/gh/numirias/python-isjosh18/branch/master/graph/badge.svg)](https://codecov.io/gh/numirias/python-isjosh18)
-[![Python Versions](https://img.shields.io/pypi/pyversions/python-isjosh18.svg)](https://pypi.python.org/pypi/python-isjosh18)
+[![Python Versions](https://img.shields.io/pypi/pyversions/isjosh18.svg)](https://pypi.python.org/pypi/isjosh18)
 
-A command-line interface to determine if Josh is 18.
+A command-line interface to determine if Josh has turned 18 yet.
 
 
 It's using the API provided by [https://hasjoshturned18yet.com/](https://hasjoshturned18yet.com/).
