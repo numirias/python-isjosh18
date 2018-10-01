@@ -15,13 +15,13 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 setup(
     name='isjosh18',
     packages=['isjosh18'],
-    version='0.10',
+    version='0.11',
     author='numirias',
     author_email='numirias@users.noreply.github.com',
-    url='',
+    url='https://github.com/numirias/python-isjosh18',
     license='MIT',
     python_requires='>=2.7',
-    install_requires=['requests', 'colorama'],
+    install_requires=['requests', 'colorama', 'mock'],
     entry_points={
         'console_scripts': [
             'isjosh18 = isjosh18.__main__:main',
