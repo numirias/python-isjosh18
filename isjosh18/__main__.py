@@ -58,9 +58,13 @@ class Layer:
         return line
 
 
-def make_balloons(width, speed, frequency):
+def make_balloons(width, speed, frequency, duration):
     balloons = []
+    start_time = time.time()
     while True:
+        if duration and time.time() >= start_time + duration:
+            raise KeyboardInterrupt()
+
         if random.random() < frequency:
             balloons.append(Balloon(width))
 
@@ -86,6 +90,23 @@ def is_josh_18():
     return res['answer'] == 'yes'
 
 
+def run(args):
+    yes = True if args.force else is_josh_18()
+    if args.balloons:
+        if not yes:
+            print('Josh isn\'t 18 yet. Use -f/--force if you want balloons '
+                  'anyway.')
+            exit()
+        try:
+            make_balloons(args.width, args.speed, args.frequency, args.duration)
+        except KeyboardInterrupt:
+            print('The party is over.')
+        return
+
+    print('Josh is ' + ('' if yes else 'NOT ') + '18.')
+    return int(not yes)
+
+
 def main():
     colorama.init()
 
@@ -100,23 +121,11 @@ def main():
         '--speed', help='Balloon speed', type=float, default=35)
     parser.add_argument(
         '--width', help='Screen width', type=int, default=80)
+    parser.add_argument(
+        '--duration', help='How many seconds the party should last (0: party '
+                           'on forever)', type=int, default=0)
     args = parser.parse_args()
-
-    yes = True if args.force else is_josh_18()
-
-    if args.balloons:
-        if not yes:
-            print('Josh isn\'t 18 yet. Use -f/--force if you want balloons '
-                  'anyway.')
-            exit()
-        try:
-            make_balloons(args.width, args.speed, args.frequency)
-        except KeyboardInterrupt:
-            print('The party is over.')
-        return
-
-    print('Josh is ' + ('' if yes else 'NOT ') + '18.')
-    exit(not yes)
+    exit(run(args))
 
 
 if __name__ == '__main__':
