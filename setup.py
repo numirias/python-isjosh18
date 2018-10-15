@@ -15,7 +15,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 setup(
     name='isjosh18',
     packages=['isjosh18'],
-    version='0.11',
+    version='0.12',
     author='numirias',
     author_email='numirias@users.noreply.github.com',
     url='https://github.com/numirias/python-isjosh18',

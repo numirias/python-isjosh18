@@ -34,12 +34,12 @@ def test_answer(stdout):
         def json(self):
             return self._json
 
-    with mock.patch.object(requests, 'get', lambda _: MockResponse({'answer': 'yes'})):
+    with mock.patch.object(requests, 'get', lambda _: MockResponse({'hasTurned18': True})):
         res = run(Args(force=False, balloons=False))
     assert res == 0
     assert 'is 18' in stdout()
 
-    with mock.patch.object(requests, 'get', lambda _: MockResponse({'answer': 'no'})):
+    with mock.patch.object(requests, 'get', lambda _: MockResponse({'hasTurned18': False})):
         res = run(Args(force=False, balloons=False))
     assert res == 1
     assert 'is NOT 18' in stdout()

@@ -81,21 +81,21 @@ def make_balloons(width, speed, frequency, duration):
         time.sleep(1.0/speed)
 
 
-def is_josh_18():
+def josh_status():
     try:
         res = requests.get(URL).json()
     except requests.ConnectionError as e:
         print('Can\'t connect: %s' % e)
         exit(1)
-    return res['answer'] == 'yes'
+    return res
 
 
 def run(args):
-    yes = True if args.force else is_josh_18()
+    status = josh_status()
     if args.balloons:
-        if not yes:
-            print('Josh isn\'t 18 yet. Use -f/--force if you want balloons '
-                  'anyway.')
+        if not status['hasBirthdayToday'] and not args.force:
+            print('It isn\'t Josh\'s birthday. Use -f/--force if you want '
+                  'balloons anyway.')
             exit()
         try:
             make_balloons(args.width, args.speed, args.frequency, args.duration)
@@ -103,8 +103,8 @@ def run(args):
             print('The party is over.')
         return
 
-    print('Josh is ' + ('' if yes else 'NOT ') + '18.')
-    return int(not yes)
+    print('Josh is ' + ('' if status['hasTurned18'] else 'NOT ') + '18.')
+    return int(not status['hasTurned18'])
 
 
 def main():
